@@ -4,9 +4,9 @@ const ORDER_TABLE = 'orders'
 
 const OrderModel = {
     id: {
-        type: DataTypes.UUID,
-        primariKey: true,
-        defaultValue: DataTypes.UUIDV4
+        primaryKey: true,
+        type: DataTypes.INTEGER,
+        autoIncrement: true
     },
 
     dateOfOrder: {
@@ -24,7 +24,11 @@ const OrderModel = {
 
 class Order extends Model{
     static config( sequelize = Sequelize ){
-
+        return {
+            sequelize, 
+            tableName: ORDER_TABLE,
+            timestamps: false
+        }
     }
 }
 

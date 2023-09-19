@@ -4,9 +4,9 @@ const PRODUCT_TABLE = 'products'
 
 const ProductModel = {
     id: {
-        type: DataTypes.UUID,
-        primariKey: true,
-        defaultValue: DataTypes.UUIDV4
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
     },
 
     title: {
@@ -28,7 +28,11 @@ const ProductModel = {
 
 class Product extends Model{
     static config( sequelize = Sequelize ){
-
+        return {
+            sequelize,
+            tableName: PRODUCT_TABLE,
+            timestamps: false
+        }
     }
 }
 

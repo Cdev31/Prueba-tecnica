@@ -1,21 +1,21 @@
 const { Sequelize ,Model, DataTypes } = require('sequelize')
 
-const PRODUCT_ORDER_TABLE = 'products'
+const PRODUCT_ORDER_TABLE = 'product_order'
 
 const ProductOrderModel = {
     id: {
-        type: DataTypes.UUID,
-        primariKey: true,
-        defaultValue: DataTypes.UUIDV4
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
     },
 
     orderId: {
-        type: DataTypes.UUID,
+        type: DataTypes.INTEGER,
         allowNull: false
     },
 
     productId: {
-        type: DataTypes.UUID,
+        type: DataTypes.INTEGER,
         allowNull: false,
     },
 
@@ -28,7 +28,11 @@ const ProductOrderModel = {
 
 class ProductOrder extends Model{
     static config( sequelize = Sequelize ){
-
+        return {
+            sequelize,
+            tableName: PRODUCT_ORDER_TABLE,
+            timestamps: false
+        }
     }
 }
 

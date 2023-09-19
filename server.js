@@ -2,7 +2,7 @@ const express = require('express')
 
 const { RouterApp } = require('./src/router')
 const { config } = require('./src/config/config.env')
-// require('./src/db/conn')
+require('./src/db/conn')
 const app = express()
 
 app.use( express.json() )
