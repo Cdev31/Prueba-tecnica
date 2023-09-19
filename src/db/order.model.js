@@ -23,6 +23,14 @@ const OrderModel = {
 
 
 class Order extends Model{
+    static associate( models){
+        this.belongsToMany(models.Product, {
+            as: 'products',
+            through: models.ProductOrder,
+            foreignKey: 'orderId',
+            otherKey: 'productId'
+        })
+    }
     static config( sequelize = Sequelize ){
         return {
             sequelize, 

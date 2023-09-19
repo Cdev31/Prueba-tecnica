@@ -5,7 +5,7 @@ const { config } = require('../config/config.env')
 
 const sequelize = new Sequelize(config.dbUrl,{
     dialect: 'postgres',
-    logging: false,
+    logging: console.log,
 })
 
 sequelize.sync({ force:false })

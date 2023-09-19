@@ -1,4 +1,6 @@
 const { Sequelize ,Model, DataTypes } = require('sequelize')
+const { PRODUCT_TABLE }= require('./product.model')
+const { ORDER_TABLE }= require('./order.model')
 
 const PRODUCT_ORDER_TABLE = 'product_order'
 
@@ -11,12 +13,24 @@ const ProductOrderModel = {
 
     orderId: {
         type: DataTypes.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+            model: ORDER_TABLE,
+            key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
     },
 
     productId: {
         type: DataTypes.INTEGER,
         allowNull: false,
+        references: {
+            model: PRODUCT_TABLE,
+            key: 'id'
+        },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL'
     },
 
     quantity: {
@@ -27,6 +41,10 @@ const ProductOrderModel = {
 
 
 class ProductOrder extends Model{
+    static associate( models ){
+        //
+    }
+
     static config( sequelize = Sequelize ){
         return {
             sequelize,

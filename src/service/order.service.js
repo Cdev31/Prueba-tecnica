@@ -3,12 +3,28 @@ const sequelize = require('../db/conn')
 class OrderService {
 
     async find(){
-        const orders = await sequelize.models.Order.findAll()
+        const orders = await sequelize.models.Order.findAll({
+            include:{
+                model: sequelize.models.Product,
+                as: 'products',
+                through:{
+                    model: sequelize.models.ProductOder,
+                    attributes: ['quantity']
+                }
+            }
+        })
         return orders
     }
 
     async findById( id ){
-        const order = await sequelize.models.Order.findByPk( id )
+        const order = await sequelize.models.Order.findByPk( id, {
+            include:[
+                {
+                    association: 'products',
+                    
+                }
+            ]
+        } )
         return order
     }
 
